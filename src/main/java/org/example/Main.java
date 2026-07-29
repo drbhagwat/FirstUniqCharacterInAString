@@ -44,7 +44,7 @@ public class Main {
             Integer value = map.get(c);
 
             if (value == 1) {
-                return(s.indexOf(c));
+                return (s.indexOf(c));
             }
         }
         return -1;
