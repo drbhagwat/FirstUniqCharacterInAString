@@ -4,48 +4,40 @@ import java.util.*;
 
 public class Main {
     private String input;
+    private final Scanner scanner = new Scanner(System.in);
 
-    public static void main() {
+    public static void main(String [] args) {
         Main main = new Main();
-        main.read();
+        main.input = main.read();
+        main.scanner.close();
         main.print();
-        System.out.println(main.firstUniqChar(main.getInput()));
+        System.out.println(main.firstUniqChar());
     }
 
-    private String getInput() {
-        return input;
-    }
-
-    public void read() {
+    public String read() {
         System.out.print("Enter a String : ");
-        Scanner scanner = new Scanner(System.in);
-        input = scanner.nextLine();
-        scanner.close();
+        return scanner.nextLine();
     }
 
     public void print() {
-        System.out.println(getInput());
+        System.out.println(input);
     }
 
-    public int firstUniqChar(String s) {
+    public int firstUniqChar() {
         Map<Character, Integer> map = new HashMap<>();
+        int inputLength = input.length();
 
-        for (char c : s.toCharArray()) {
-            if (map.containsKey(c)) {
-                int frequency = map.get(c);
-                frequency++;
-                map.put(c, frequency);
-            } else {
-                map.put(c, 1);
-            }
+        for (int i = 0; i < inputLength; i++) {
+            char c = input.charAt(i);
+            map.put(c, map.getOrDefault(c, 0) + 1);
         }
 
-        for (char c : s.toCharArray()) {
-            Integer value = map.get(c);
+        for (int i = 0; i < inputLength; i++) {
 
-            if (value == 1) {
-                return (s.indexOf(c));
+            if (map.get(input.charAt(i)) == 1) {
+                return i;
             }
+
         }
         return -1;
     }
